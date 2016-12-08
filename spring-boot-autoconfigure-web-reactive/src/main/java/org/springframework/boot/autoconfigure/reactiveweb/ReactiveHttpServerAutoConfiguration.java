@@ -33,6 +33,7 @@ import org.springframework.web.reactive.DispatcherHandler;
 		ReactiveHttpServerConfiguration.JettyAutoConfiguration.class,
 		ReactiveHttpServerConfiguration.ReactorNettyAutoConfiguration.class,
 		ReactiveHttpServerConfiguration.RxNettyAutoConfiguration.class,
+		ReactiveHttpServerConfiguration.VertxAutoConfiguration.class,
 		ReactiveHttpServerConfiguration.UndertowAutoConfiguration.class})
 public class ReactiveHttpServerAutoConfiguration {
 

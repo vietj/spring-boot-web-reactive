@@ -17,6 +17,8 @@ package org.springframework.boot.autoconfigure.reactiveweb;
 
 import io.reactivex.netty.protocol.http.server.HttpServerImpl;
 import io.undertow.Undertow;
+import io.vertx.core.Vertx;
+import org.springframework.boot.context.embedded.VertxEmbeddedHttpServerFactory;
 import reactor.ipc.netty.http.server.HttpServer;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -76,6 +78,23 @@ abstract class ReactiveHttpServerConfiguration {
 		@Bean
 		public UndertowEmbeddedHttpServerFactory undertowEmbeddedHttpServerFactory() {
 			return new UndertowEmbeddedHttpServerFactory();
+		}
+	}
+
+	@ConditionalOnMissingBean(ReactiveHttpServerFactory.class)
+	@ConditionalOnClass({Vertx.class})
+	static class VertxAutoConfiguration {
+
+		private Vertx vertx = Vertx.vertx();
+
+		@Bean
+		public Vertx vertx() {
+			return vertx;
+		}
+
+		@Bean
+		public VertxEmbeddedHttpServerFactory vertxEmbeddedHttpServerFactory() {
+			return new VertxEmbeddedHttpServerFactory(vertx);
 		}
 	}
 
